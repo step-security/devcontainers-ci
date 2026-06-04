@@ -33,10 +33,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # github-action and merge use TypeScript project references to ../common,
+          # so common's deps must be installed before tsc --build runs.
+          # The reusable workflow only npm ci's the working_directory, so we
+          # bootstrap common explicitly in the script.
           - working_directory: github-action
-            script: npm run all
+            script: (cd ../common && npm ci) && npm run all
           - working_directory: merge
-            script: npm run all
+            script: (cd ../common && npm ci) && npm run all
           - working_directory: common
             script: npm run build
           - working_directory: .github/scripts
