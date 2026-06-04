@@ -7,9 +7,9 @@ on:
         description: "Tag for the release"
         required: true
       script:
-        description: "Build script to run"
+        description: "Build script to run (must install common's deps because both github-action and merge tsc-reference ../common)"
         required: false
-        default: "npm run all"
+        default: "(cd ../common && npm ci) && npm run all"
       node_version:
         description: "Node.js version to use"
         required: false
@@ -32,6 +32,6 @@ jobs:
     uses: step-security/reusable-workflows/.github/workflows/actions_release.yaml@v1
     with:
       tag: "${{ github.event.inputs.tag }}"
-      script: ${{ inputs.script || 'npm run all' }}
+      script: ${{ inputs.script || '(cd ../common && npm ci) && npm run all' }}
       node_version: ${{ inputs.node_version || '24' }}
       working_directory: ${{ inputs.working_directory || 'github-action,merge' }}
