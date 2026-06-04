@@ -19,8 +19,8 @@
     "url": "git+https://github.com/step-security/devcontainers-ci.git"
   },
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/exec": "^1.1.1",
+    "@actions/core": "^2.0.0",
+    "@actions/exec": "^2.0.0",
     "axios": "^1.7.7"
   },
   "devDependencies": {
